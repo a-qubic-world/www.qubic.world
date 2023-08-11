@@ -7,6 +7,7 @@ import { TextureLoader } from 'three/src/loaders/TextureLoader'
 
 // import App.css
 import './App.css'
+import logo from './logo.svg';
 
 type Axis = "x" | "y" | "z"
 
@@ -76,6 +77,7 @@ function Box(props: ThreeElements['mesh']) {
 
 createRoot(document.getElementById('root') as HTMLElement).render(
   <>
+    <img src={logo} className="app-logo" alt="Qubic logo" /> 
     <div className='canvas-container'>
       <Canvas camera={{ fov: 75, position: [0, 0, 5] }}>
         <ambientLight  intensity={2} />
@@ -83,7 +85,7 @@ createRoot(document.getElementById('root') as HTMLElement).render(
           <Box position={[0, 0, 0]} />
         </Suspense>    
       </Canvas>
-    </div>
-    <div className='claim'>qubic is rolling the dice ...</div>
+    </div>    
+    <div className='claim'><span>Qubic</span><br /> is rolling the dice ...</div>
   </>,
 )

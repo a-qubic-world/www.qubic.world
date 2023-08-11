@@ -3,28 +3,43 @@ body {
   padding: 0;
   overflow: hidden;
   background-color: #ffffff;
-  border: 5px solid #52BB73;
+  background-size: 30px 30px;
+  background-image: radial-gradient(circle, rgba(0,0,0,0.2) 1px, rgba(0, 0, 0, 0) 1px);
+}
+
+.app-logo {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: min(50vw, 200px);
 }
 
 .claim {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: 'Carter One', sans-serif;
-  font-size: 2rem;
+  /* top: 50%; */
+  /* transform: translate(-50%, -50%); */
+  bottom: 5%;
+  font-family: 'Prompt', sans-serif;
+  font-size: clamp(16px, 8vw, 40px);
   font-weight: 300;
   color: #52BB73;
   text-align: center;
   width: 100%;
-  max-width: 600px;
-  line-height: 1.5;
+  line-height: 1.2;
+}
+
+.claim span {
+  font-weight: 700;
 }
 
 .canvas-container {
   width: 100vw;
   height: 100vh;
   position: relative;
+  border: 5px solid #52BB73;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }
 
 .canvas-container canvas {
