@@ -8,6 +8,9 @@ import { TextureLoader } from 'three/src/loaders/TextureLoader'
 // import App.css
 import './App.css'
 import logo from './logo.svg';
+import {ReactComponent as IconDiscord} from './assets/icn-discord.svg'
+import {ReactComponent as IconTwitter} from './assets/icn-twitter.svg'
+import SafeTradeTicker from './components/SafeTradeTicker'
 
 type Axis = "x" | "y" | "z"
 
@@ -82,10 +85,18 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       <Canvas camera={{ fov: 75, position: [0, 0, 5] }}>
         <ambientLight  intensity={2} />
         <Suspense fallback={null}>
-          <Box position={[0, 0, 0]} />
+          <Box position={[0, 1, 0]} />
         </Suspense>    
       </Canvas>
-    </div>    
-    <div className='claim'><span>Qubic</span><br /> is rolling the dice ...</div>
+    </div>
+    <SafeTradeTicker />
+    <div className='claim'>
+      <span>Qubic</span><br /> <i>rolling the logo dice</i>
+      <p>
+        Where the community leads at every turn. <br />Be part of the journey!<br/>
+        <a className='btn slide' href="https://twitter.com/qubic_world" target='_blank' rel="noreferrer"><IconTwitter /></a>        
+        <a className='btn slide' href='https://t.co/GiMaaJKIRi' target='_blank' rel="noreferrer"><IconDiscord /></a>
+      </p>      
+    </div>
   </>,
 )

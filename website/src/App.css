@@ -1,49 +1,33 @@
-body {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #ffffff;
-  background-size: 30px 30px;
-  background-image: radial-gradient(circle, rgba(0,0,0,0.2) 1px, rgba(0, 0, 0, 0) 1px);
-}
-
-.app-logo {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  width: min(50vw, 200px);
-}
-
-.claim {
-  position: absolute;
-  /* top: 50%; */
-  /* transform: translate(-50%, -50%); */
-  bottom: 5%;
+body { margin: 0; padding: 0; overflow: hidden; background-color: #ffffff;
+  background-size: 30px 30px; background-image: radial-gradient(circle, rgba(0,0,0,0.2) 1px, rgba(0, 0, 0, 0) 1px);
   font-family: 'Prompt', sans-serif;
-  font-size: clamp(16px, 8vw, 40px);
-  font-weight: 300;
-  color: #52BB73;
-  text-align: center;
-  width: 100%;
-  line-height: 1.2;
 }
 
-.claim span {
-  font-weight: 700;
-}
+.app-logo { position: fixed; top: 20px; left: 20px; width: min(50vw, 200px); }
 
-.canvas-container {
-  width: 100vw;
-  height: 100vh;
-  position: relative;
-  border: 5px solid #52BB73;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-}
+.claim { position: absolute; bottom: 5%; font-size: clamp(16px, 8vw, 40px); font-weight: 300; color: #52BB73; text-align: center; width: 100%; line-height: 0.8em; }
+.claim span { font-weight: 700; }
+.claim i { font-size: 0.5em; }
+.claim p {color: black; font-size: 0.5em; padding: 0 2em; }
 
-.canvas-container canvas {
-  width: 100%;
-  height: 100%;
-  display: block;
+.canvas-container { width: 100vw; height: 100vh; position: relative; border: 5px solid #52BB73; box-sizing: border-box; }
+.canvas-container canvas { width: 100%; height: 100%; display: block; }
+
+.ticker { transition: 0.5s; position: absolute; top: 120px; right: 20px; list-style: none; background-color: black; padding: 10px; color: white; font-size: 12px; }
+.ticker ul { list-style: none; margin: 0; padding: 0; display: flex; }
+.ticker ul li { flex: 1 1; margin-left: 15px; flex-grow: 0; flex-shrink: 0; }
+.ticker li:first-child { margin-left: 0; cursor: pointer; transition: 0.5s; }
+.ticker li:first-child:hover { cursor: pointer; background-color: #52BB73; }
+.ticker li:first-child img { width: 29px; margin-top: 4px; }
+
+
+.btn { transition: 0.25s; text-transform: uppercase; font-size: 0.5em; background: black; color: white;
+  text-decoration: none; border: 2px solid; line-height: 1; margin: 0.5em; padding: 0.5em; display: inline-block;
+  
+  &:hover,
+  &:focus { 
+    border-color: #52BB73;
+    color: black;
+  }
 }
+.btn.slide:hover, btn.slide:focus { box-shadow: inset 8em 0 0 0 #52BB73; cursor: pointer; }
