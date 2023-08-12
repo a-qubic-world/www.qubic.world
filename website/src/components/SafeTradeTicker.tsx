@@ -45,15 +45,16 @@ function SafeTradeTicker() {
 
   return (
     <div    className='ticker' 
-            style={{right: (open) ? '-80px' : '-274px'}}
-            onClick={() => setOpen(!open)}
+            style={{right: (open) ? '-10px' : '-274px'}}
+            onMouseOver={() => setOpen(true)}
+            onMouseOut={() => setOpen(false)}
         >
         <ul>            
             <li><img src={chartIcon} alt='chart icon' /></li>
-            <li>Last: ${ticker.ticker.last}</li>
+            <li><span>Last:<br />${ticker.ticker.last}</span></li>
             {/* <li>Open: ${ticker.ticker.open}</li> */}
-            <li>High: ${ticker.ticker.high}</li>
-            <li>Low: ${ticker.ticker.low}</li>
+            <li><span>High:<br />${ticker.ticker.high}</span></li>
+            <li><span>Low:<br />${ticker.ticker.low}</span></li>
         </ul>
     </div>
   )
