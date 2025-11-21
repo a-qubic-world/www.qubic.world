@@ -1,0 +1,65 @@
+import React from 'react';
+
+interface LogoIconProps {
+  size?: number;
+  className?: string;
+}
+
+export const LogoIcon: React.FC<LogoIconProps> = ({ size = 60, className }) => {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 60 60"
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style={{ stopColor: '#ff0080', stopOpacity: 1 }} />
+          <stop offset="100%" style={{ stopColor: '#7c3aed', stopOpacity: 1 }} />
+        </linearGradient>
+      </defs>
+      <circle
+        cx="30"
+        cy="30"
+        r="22"
+        fill="none"
+        stroke="url(#grad1)"
+        strokeWidth="2.5"
+        opacity="0.4"
+      />
+      {/* Left bar - rotated */}
+      <rect
+        x="12"
+        y="18"
+        width="8"
+        height="24"
+        rx="2"
+        fill="#ff0080"
+        opacity="0.8"
+        transform="rotate(-15 16 30)"
+      />
+      {/* Middle bar */}
+      <rect
+        x="26"
+        y="15"
+        width="8"
+        height="30"
+        rx="2"
+        fill="url(#grad1)"
+      />
+      {/* Right bar - rotated */}
+      <rect
+        x="40"
+        y="18"
+        width="8"
+        height="24"
+        rx="2"
+        fill="#7c3aed"
+        opacity="0.8"
+        transform="rotate(15 44 30)"
+      />
+    </svg>
+  );
+};

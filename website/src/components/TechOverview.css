@@ -1,0 +1,123 @@
+.tech-section {
+  padding: 100px 20px;
+  position: relative;
+}
+
+.tech-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.tech-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.tech-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 40px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.tech-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(135deg, #ff0080, #7c3aed);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.tech-card:hover {
+  border-color: rgba(255, 0, 128, 0.5);
+  box-shadow: 0 10px 40px rgba(255, 0, 128, 0.15);
+  transform: translateY(-5px);
+}
+
+.tech-card:hover::before {
+  transform: scaleX(1);
+}
+
+.tech-highlight {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff0080, #7c3aed);
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.tech-card h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 24px;
+  color: #ffffff;
+  margin-bottom: 15px;
+}
+
+.tech-card p {
+  color: #a0a0a0;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.tech-cta {
+  text-align: center;
+}
+
+.tech-button {
+  display: inline-block;
+  padding: 18px 40px;
+  background: transparent;
+  color: #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.tech-button:hover {
+  border-color: #ff0080;
+  background: rgba(255, 0, 128, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(255, 0, 128, 0.2);
+}
+
+@media (max-width: 768px) {
+  .tech-section {
+    padding: 60px 20px;
+  }
+
+  .tech-header {
+    margin-bottom: 50px;
+  }
+
+  .tech-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .tech-card {
+    padding: 30px;
+  }
+}
