@@ -15,19 +15,31 @@ export const DeveloperSection: React.FC = () => {
     {
       title: 'Documentation',
       description: 'Complete guides, API references, and tutorials to get started',
-      link: 'https://docs.qubic.world',
+      link: 'https://docs.qubic.org',
       external: true,
     },
     {
-      title: 'GitHub',
-      description: 'Explore repositories, contribute to projects, and view source code',
+      title: 'Whitepaper',
+      description: 'Deep dive into Qubic\'s architecture and technical specifications',
+      link: 'https://whitepaper.qubic.org',
+      external: true,
+    },
+    {
+      title: 'Qubic GitHub',
+      description: 'Explore official Qubic repositories and contribute to the ecosystem',
       link: 'https://github.com/qubic',
+      external: true,
+    },
+    {
+      title: 'Qubic.world GitHub',
+      description: 'Check out our community projects and website source code',
+      link: 'https://github.com/a-qubic-world',
       external: true,
     },
     {
       title: 'Developer Tools',
       description: 'SDKs, libraries, and tools for building on Qubic',
-      link: 'https://docs.qubic.world/tools',
+      link: 'https://docs.qubic.org/tools',
       external: true,
     },
     {
@@ -50,56 +62,17 @@ export const DeveloperSection: React.FC = () => {
           <div className="developer-icon">
             <DevIcon size={100} />
           </div>
-          <h2 className="section-title gradient-text">Build on Qubic</h2>
+          <h2 className="section-title gradient-text">Ready to Join the Adventure?</h2>
           <p className="section-subtitle">
-            Join developers building the next generation of blockchain applications
+            Learn more about developing on Qubic with these resources. We got you covered. Join developers building the next generation of blockchain applications.
           </p>
         </motion.div>
 
         <div className="developer-content">
           <motion.div
-            className="developer-features"
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
-            <h3>Why Build on Qubic?</h3>
-            <ul>
-              <li>
-                <span className="feature-icon">⚡</span>
-                <div>
-                  <strong>Blazing Fast</strong>
-                  <p>15.5M+ TPS with 2-second finality</p>
-                </div>
-              </li>
-              <li>
-                <span className="feature-icon">💰</span>
-                <div>
-                  <strong>Zero Gas Fees</strong>
-                  <p>No transaction costs for users or developers</p>
-                </div>
-              </li>
-              <li>
-                <span className="feature-icon">🤖</span>
-                <div>
-                  <strong>AI Integration</strong>
-                  <p>Useful PoW with AI model training</p>
-                </div>
-              </li>
-              <li>
-                <span className="feature-icon">🛠️</span>
-                <div>
-                  <strong>Developer Support</strong>
-                  <p>Active team ready to help you build</p>
-                </div>
-              </li>
-            </ul>
-          </motion.div>
-
-          <motion.div
             className="developer-resources"
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
             <h3>Resources</h3>

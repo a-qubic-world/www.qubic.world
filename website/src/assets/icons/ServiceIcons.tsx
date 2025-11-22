@@ -86,7 +86,7 @@ export const StatsIcon: React.FC<IconProps> = ({ size = 60, className }) => {
   );
 };
 
-// Developer/Docs Icon - Code brackets
+// Developer/Docs Icon - Code symbol </>
 export const DevIcon: React.FC<IconProps> = ({ size = 60, className }) => {
   return (
     <svg
@@ -103,12 +103,12 @@ export const DevIcon: React.FC<IconProps> = ({ size = 60, className }) => {
         </linearGradient>
       </defs>
       <circle cx="30" cy="30" r="22" fill="none" stroke="url(#dev-grad)" strokeWidth="2.5" opacity="0.4" />
-      {/* Left bracket */}
-      <path d="M 20 18 L 16 22 L 16 38 L 20 42" stroke="#ff0080" strokeWidth="3" fill="none" opacity="0.8" transform="rotate(15 18 30)" />
-      {/* Middle line */}
-      <line x1="28" y1="20" x2="32" y2="40" stroke="url(#dev-grad)" strokeWidth="3" opacity="1" />
-      {/* Right bracket */}
-      <path d="M 40 18 L 44 22 L 44 38 L 40 42" stroke="#7c3aed" strokeWidth="3" fill="none" opacity="0.8" transform="rotate(-15 42 30)" />
+      {/* > symbol on left */}
+      <path d="M 16 24 L 22 30 L 16 36" stroke="#7c3aed" strokeWidth="3.5" fill="none" strokeLinecap="round" strokeLinejoin="round" opacity="0.9" />
+      {/* / symbol */}
+      <line x1="28" y1="38" x2="32" y2="22" stroke="url(#dev-grad)" strokeWidth="3.5" strokeLinecap="round" opacity="1" />
+      {/* < symbol on right */}
+      <path d="M 44 24 L 38 30 L 44 36" stroke="#ff0080" strokeWidth="3.5" fill="none" strokeLinecap="round" strokeLinejoin="round" opacity="0.9" />
     </svg>
   );
 };

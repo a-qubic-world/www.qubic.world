@@ -6,25 +6,22 @@ export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   const footerLinks = {
-    services: [
+    products: [
       { label: 'QNS Domains', url: '/domain' },
       { label: 'NFT Gallery', url: '/nft' },
       { label: 'Statistics', url: '/statistics' },
     ],
-    developers: [
-      { label: 'Documentation', url: 'https://docs.qubic.world', external: true },
-      { label: 'GitHub', url: 'https://github.com/qubic', external: true },
-      { label: 'API Reference', url: 'https://docs.qubic.world/api', external: true },
+    resources: [
+      { label: 'Documentation', url: 'https://docs.qubic.org', external: true },
+      { label: 'Whitepaper', url: 'https://whitepaper.qubic.org', external: true },
+      { label: 'Qubic GitHub', url: 'https://github.com/qubic', external: true },
+      { label: 'Qubic.world GitHub', url: 'https://github.com/a-qubic-world', external: true },
+      { label: 'Developer Tools', url: 'https://docs.qubic.org/tools', external: true },
+      { label: 'About Qubic', url: 'https://qubic.org', external: true },
     ],
     community: [
       { label: 'Twitter', url: 'https://twitter.com/qubic_world', external: true },
       { label: 'Discord', url: 'https://discord.gg/qubic', external: true },
-      { label: 'Telegram', url: 'https://t.me/qubic', external: true },
-    ],
-    resources: [
-      { label: 'About Qubic', url: 'https://qubic.org', external: true },
-      { label: 'Whitepaper', url: 'https://docs.qubic.world', external: true },
-      { label: 'Blog', url: 'https://medium.com/@qubic', external: true },
     ],
   };
 
@@ -34,22 +31,22 @@ export const Footer: React.FC = () => {
         <div className="footer-content">
           <div className="footer-brand">
             <div className="footer-logo">
-              <LogoIcon size={50} />
+              <LogoIcon size={80} />
               <div className="footer-logo-text">
                 <span className="footer-logo-qubic">qubic</span>
                 <span className="footer-logo-world">.world</span>
               </div>
             </div>
             <p className="footer-tagline">
-              Community hub for building on Qubic
+              Where Qubic powers innovation
             </p>
           </div>
 
           <div className="footer-links">
             <div className="footer-column">
-              <h4>Services</h4>
+              <h4>Products</h4>
               <ul>
-                {footerLinks.services.map((link) => (
+                {footerLinks.products.map((link) => (
                   <li key={link.label}>
                     <a href={link.url}>{link.label}</a>
                   </li>
@@ -58,9 +55,9 @@ export const Footer: React.FC = () => {
             </div>
 
             <div className="footer-column">
-              <h4>Developers</h4>
+              <h4>Resources</h4>
               <ul>
-                {footerLinks.developers.map((link) => (
+                {footerLinks.resources.map((link) => (
                   <li key={link.label}>
                     <a
                       href={link.url}
@@ -78,23 +75,6 @@ export const Footer: React.FC = () => {
               <h4>Community</h4>
               <ul>
                 {footerLinks.community.map((link) => (
-                  <li key={link.label}>
-                    <a
-                      href={link.url}
-                      target={link.external ? '_blank' : undefined}
-                      rel={link.external ? 'noopener noreferrer' : undefined}
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="footer-column">
-              <h4>Resources</h4>
-              <ul>
-                {footerLinks.resources.map((link) => (
                   <li key={link.label}>
                     <a
                       href={link.url}

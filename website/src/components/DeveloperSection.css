@@ -20,17 +20,19 @@
 }
 
 .developer-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: start;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .developer-features h3,
+.developer-resources {
+  text-align: center;
+}
+
 .developer-resources h3 {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 28px;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   color: #ffffff;
 }
 
@@ -76,8 +78,9 @@
 
 .resources-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  text-align: left;
 }
 
 .resource-card {
@@ -147,13 +150,8 @@
 }
 
 @media (max-width: 1024px) {
-  .developer-content {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
   .resources-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -166,11 +164,7 @@
     margin-bottom: 50px;
   }
 
-  .developer-features li {
-    padding: 20px;
-  }
-
-  .feature-icon {
-    font-size: 24px;
+  .resources-grid {
+    grid-template-columns: 1fr;
   }
 }

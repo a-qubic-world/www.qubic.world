@@ -5,6 +5,51 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+.metrics-intro {
+  max-width: 800px;
+  margin: 0 auto 60px;
+  text-align: center;
+}
+
+.metrics-intro-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 700;
+  background: linear-gradient(135deg, #ff0080, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 20px;
+}
+
+.metrics-intro-text {
+  font-size: clamp(16px, 2vw, 20px);
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.metrics-intro-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ff0080;
+  text-decoration: none;
+  padding: 12px 24px;
+  border: 1px solid rgba(255, 0, 128, 0.3);
+  border-radius: 8px;
+  background: rgba(255, 0, 128, 0.05);
+  transition: all 0.3s ease;
+}
+
+.metrics-intro-link:hover {
+  background: rgba(255, 0, 128, 0.1);
+  border-color: rgba(255, 0, 128, 0.5);
+  transform: translateY(-2px);
+}
+
 .metrics-container {
   max-width: 1200px;
   margin: 0 auto;

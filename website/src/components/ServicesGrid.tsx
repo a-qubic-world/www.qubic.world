@@ -70,10 +70,10 @@ export const ServicesGrid: React.FC = () => {
               <h3 className="service-title">{service.title}</h3>
               <p className="service-description">{service.description}</p>
               <a href={service.link} className="service-link">
-                {service.status === 'coming-soon' ? 'Coming Soon' : 'Explore →'}
+                {service.status === 'coming-soon' ? 'Get Notified' : 'Explore →'}
               </a>
               {service.status === 'coming-soon' && (
-                <span className="coming-soon-badge">Soon</span>
+                <span className="coming-soon-badge">Coming Soon</span>
               )}
             </motion.div>
           ))}

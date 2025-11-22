@@ -55,8 +55,13 @@
 
 .footer-links {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 40px;
+  grid-template-columns: repeat(3, auto);
+  gap: 60px;
+  justify-content: end;
+}
+
+.footer-column {
+  text-align: left;
 }
 
 .footer-column h4 {
