@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { motion, AnimatePresence, useSpring, useTransform } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import './Hero.css';
 
 interface CubeTransform {
@@ -37,25 +37,49 @@ const FlatCube = React.forwardRef<HTMLDivElement, { color: string; shift?: strin
   )
 );
 
-const CursorCube: React.FC<{ x: number; y: number }> = ({ x, y }) => (
-  <div
-    className="cursor-cube"
-    style={{
-      left: `${x}px`,
-      top: `${y}px`,
-    }}
-  >
-    <svg width="50" height="50" viewBox="0 0 120 120">
-      <defs>
-        <linearGradient id="cursorGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#ff0080" />
-          <stop offset="100%" stopColor="#7c3aed" />
-        </linearGradient>
-      </defs>
-      <rect x="30" y="30" width="60" height="60" fill="url(#cursorGradient)" opacity="0.9" />
-    </svg>
-  </div>
-);
+const CursorCube: React.FC<{ x: number; y: number }> = ({ x, y }) => {
+  const [prevPos, setPrevPos] = useState({ x: 0, y: 0 });
+  const [velocity, setVelocity] = useState(0);
+
+  useEffect(() => {
+    const dx = x - prevPos.x;
+    const dy = y - prevPos.y;
+    const speed = Math.sqrt(dx * dx + dy * dy);
+    setVelocity(speed);
+    setPrevPos({ x, y });
+  }, [x, y]);
+
+  const scaleX = 1 + Math.min(velocity / 100, 0.5);
+  const scaleY = 1 - Math.min(velocity / 200, 0.3);
+
+  return (
+    <motion.div
+      className="cursor-cube"
+      animate={{
+        x: x - 25,
+        y: y - 25,
+        scaleX,
+        scaleY,
+      }}
+      transition={{
+        type: "spring",
+        stiffness: 80,
+        damping: 20,
+        mass: 0.5,
+      }}
+    >
+      <svg width="50" height="50" viewBox="0 0 120 120">
+        <defs>
+          <linearGradient id="cursorGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#ff0080" />
+            <stop offset="100%" stopColor="#7c3aed" />
+          </linearGradient>
+        </defs>
+        <rect x="30" y="30" width="60" height="60" fill="url(#cursorGradient)" opacity="0.9" />
+      </svg>
+    </motion.div>
+  );
+};
 
 export const Hero: React.FC = () => {
   const rotatingWords = ['experiments', 'identities', 'adventures'];
@@ -63,9 +87,20 @@ export const Hero: React.FC = () => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [pinkTransform, setPinkTransform] = useState<CubeTransform>({ x: 0, y: 0, rotate: 0 });
   const [purpleTransform, setPurpleTransform] = useState<CubeTransform>({ x: 0, y: 0, rotate: 0 });
+  const [isMobile, setIsMobile] = useState(false);
+  const [showScrollIndicator, setShowScrollIndicator] = useState(true);
 
   const pinkCubeRef = useRef<HTMLDivElement>(null);
   const purpleCubeRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -73,6 +108,14 @@ export const Hero: React.FC = () => {
     }, 3000);
     return () => clearInterval(interval);
   }, [rotatingWords.length]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollIndicator(window.scrollY < 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const calculateMagneticPull = useCallback((cubeRef: React.RefObject<HTMLDivElement>, mouseX: number, mouseY: number): CubeTransform => {
     if (!cubeRef.current) return { x: 0, y: 0, rotate: 0 };
@@ -89,7 +132,6 @@ export const Hero: React.FC = () => {
 
     if (distance < magneticRadius) {
       const pullStrength = 1 - (distance / magneticRadius);
-      const maxPull = 40;
 
       return {
         x: deltaX * pullStrength * 0.3,
@@ -129,32 +171,68 @@ export const Hero: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.2 }}
       >
-        <div className="hero-multiline-title">
-          <div className="title-line line-center-right">
-            <FlatCube ref={pinkCubeRef} color="#ff0080" shift="-40px" transform={pinkTransform} /> One world
+        {!isMobile ? (
+          /* Desktop 3-line layout */
+          <div className="hero-multiline-title">
+            <div className="title-line line-center-right">
+              <FlatCube ref={pinkCubeRef} color="#ff0080" shift="-40px" transform={pinkTransform} /> One world.
+            </div>
+            <div className="title-line line-left">
+              Crafting endless <FlatCube ref={purpleCubeRef} color="#7c3aed" shift="30px" transform={purpleTransform} />
+            </div>
+            <div className="title-line line-right">
+              <span className="rotating-word-container">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={currentWordIndex}
+                    className="rotating-word-inline"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    {rotatingWords[currentWordIndex]}
+                  </motion.span>
+                </AnimatePresence>
+                <span className="word-underline"></span>
+              </span>
+              <span className="on-qubic"> on Qubic</span>
+            </div>
           </div>
-          <div className="title-line line-left">
-            to craft endless <FlatCube ref={purpleCubeRef} color="#7c3aed" shift="30px" transform={purpleTransform} />
+        ) : (
+          /* Mobile 6-line layout */
+          <div className="hero-multiline-title mobile-layout">
+            <div className="title-line line-right">
+              <FlatCube ref={pinkCubeRef} color="#ff0080" shift="-40px" transform={pinkTransform} /> One world
+            </div>
+            <div className="title-line line-left">
+              to craft
+            </div>
+            <div className="title-line line-right">
+              endless <FlatCube ref={purpleCubeRef} color="#7c3aed" shift="30px" transform={purpleTransform} />
+            </div>
+            <div className="title-line line-left">
+              <span className="rotating-word-container">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={currentWordIndex}
+                    className="rotating-word-inline"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    {rotatingWords[currentWordIndex]}
+                  </motion.span>
+                </AnimatePresence>
+                <span className="word-underline"></span>
+              </span>
+            </div>
+            <div className="title-line line-right">
+              on Qubic
+            </div>
           </div>
-          <div className="title-line line-right">
-            <span className="rotating-word-container">
-              <AnimatePresence mode="wait">
-                <motion.span
-                  key={currentWordIndex}
-                  className="rotating-word-inline"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  {rotatingWords[currentWordIndex]}
-                </motion.span>
-              </AnimatePresence>
-              <span className="word-underline"></span>
-            </span>
-            <span className="on-qubic"> on Qubic</span>
-          </div>
-        </div>
+        )}
       </motion.div>
 
       {/* Animated background elements */}
@@ -187,6 +265,43 @@ export const Hero: React.FC = () => {
 
       {/* Cursor cube */}
       <CursorCube x={mousePos.x} y={mousePos.y} />
+
+      {/* Scroll Indicator */}
+      {showScrollIndicator && (
+        <div
+          className="animate-bounce cursor-pointer"
+          onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+          style={{
+            position: 'fixed',
+            bottom: '40px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 9999,
+            width: '48px',
+            height: '48px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'rgba(0,0,0,0.3)',
+            borderRadius: '50%'
+          }}
+        >
+          <svg
+            width="24"
+            height="24"
+            fill="none"
+            stroke="#ff0080"
+            strokeWidth="3"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M19 14l-7 7m0 0l-7-7m7 7V3"
+            />
+          </svg>
+        </div>
+      )}
     </section>
   );
 };

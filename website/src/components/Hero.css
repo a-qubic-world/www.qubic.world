@@ -5,7 +5,6 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  overflow: hidden;
   padding: 100px 20px 60px;
 }
 
@@ -36,9 +35,10 @@
   position: fixed;
   pointer-events: none;
   z-index: 9999;
-  transform: translate(-25px, -25px);
+  top: 0;
+  left: 0;
   opacity: 0.8;
-  transition: opacity 0.3s ease;
+  will-change: transform;
 }
 
 .on-qubic {
@@ -55,10 +55,20 @@
   color: #ffffff;
 }
 
+/* Desktop/Mobile Layout Visibility */
+.desktop-layout {
+  display: block;
+}
+
+.mobile-layout {
+  display: none;
+}
+
 .title-line {
   margin: 0.1em 0;
   display: flex;
   align-items: center;
+  min-height: 180px;
 }
 
 .line-center-right {
@@ -154,6 +164,10 @@
     width: 140px;
     height: 140px;
   }
+
+  .title-line {
+    min-height: 140px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -161,22 +175,41 @@
     padding: 120px 20px 40px;
   }
 
+  /* Switch to mobile 6-line layout */
+  .desktop-layout {
+    display: none;
+  }
+
+  .mobile-layout {
+    display: block;
+  }
+
   .hero-multiline-title {
-    font-size: clamp(2rem, 10vw, 6rem);
+    font-size: clamp(2.5rem, 12vw, 5rem);
   }
 
-  /* Stack lines on mobile */
-  .title-line {
-    justify-content: center !important;
+  /* Stenographic alignment for mobile */
+  .mobile-layout .title-line {
+    margin: 0.15em 0;
   }
 
-  .line-center-right {
-    margin-right: 0;
+  .mobile-layout .line-left {
+    justify-content: flex-start;
+    padding-left: 10%;
+  }
+
+  .mobile-layout .line-right {
+    justify-content: flex-end;
+    padding-right: 10%;
   }
 
   .flat-cube {
     width: 120px;
     height: 120px;
+  }
+
+  .title-line {
+    min-height: 120px;
   }
 
   .word-underline {
@@ -193,12 +226,25 @@
 
 @media (max-width: 480px) {
   .hero-multiline-title {
-    font-size: clamp(1.75rem, 11vw, 4rem);
+    font-size: clamp(2rem, 13vw, 4rem);
+  }
+
+  /* Tighter stenographic spacing on small mobile */
+  .mobile-layout .line-left {
+    padding-left: 5%;
+  }
+
+  .mobile-layout .line-right {
+    padding-right: 5%;
   }
 
   .flat-cube {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
+  }
+
+  .title-line {
+    min-height: 80px;
   }
 
   .word-underline {
