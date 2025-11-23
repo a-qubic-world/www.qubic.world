@@ -15,7 +15,7 @@ export const Footer: React.FC = () => {
       { label: 'Documentation', url: 'https://docs.qubic.org', external: true },
       { label: 'Whitepaper', url: 'https://whitepaper.qubic.org', external: true },
       { label: 'Qubic GitHub', url: 'https://github.com/qubic', external: true },
-      { label: 'Qubic.world GitHub', url: 'https://github.com/a-qubic-world', external: true },
+      { label: 'qubic.world GitHub', url: 'https://github.com/a-qubic-world', external: true },
       { label: 'Developer Tools', url: 'https://docs.qubic.org/tools', external: true },
       { label: 'About Qubic', url: 'https://qubic.org', external: true },
     ],
@@ -91,7 +91,7 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className="footer-bottom">
-          <p>&copy; {currentYear} Qubic.world. All rights reserved.</p>
+          <p>&copy; {currentYear} qubic.world. All rights reserved.</p>
           <div className="footer-bottom-links">
             <a href="/privacy">Privacy Policy</a>
             <a href="/terms">Terms of Service</a>

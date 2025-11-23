@@ -31,7 +31,7 @@ export const DeveloperSection: React.FC = () => {
       external: true,
     },
     {
-      title: 'Qubic.world GitHub',
+      title: 'qubic.world GitHub',
       description: 'Check out our community projects and website source code',
       link: 'https://github.com/a-qubic-world',
       external: true,

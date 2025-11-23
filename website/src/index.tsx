@@ -6,7 +6,6 @@ import { MetricsBar } from './components/MetricsBar';
 import { ServicesGrid } from './components/ServicesGrid';
 import { DeveloperSection } from './components/DeveloperSection';
 import { Footer } from './components/Footer';
-import SafeTradeTicker from './components/SafeTradeTicker';
 import './styles/global.css';
 
 const App: React.FC = () => {
@@ -30,7 +29,6 @@ const App: React.FC = () => {
         <DeveloperSection />
       </main>
       <Footer />
-      <SafeTradeTicker />
     </>
   );
 };
