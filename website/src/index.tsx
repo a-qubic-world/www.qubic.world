@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Navigation } from './components/Navigation';
 import { Hero } from './components/Hero';
@@ -10,6 +10,16 @@ import SafeTradeTicker from './components/SafeTradeTicker';
 import './styles/global.css';
 
 const App: React.FC = () => {
+  useEffect(() => {
+    // Prevent Chrome scroll restoration on refresh
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
+    // Force scroll to top
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <Navigation />

@@ -1,11 +1,12 @@
 /* Main Hero - Full Page */
 .hero-main {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   padding: 100px 20px 60px;
+  overflow: hidden;
 }
 
 .hero-main-content {
