@@ -10,9 +10,9 @@ interface Metric {
 
 export const MetricsBar: React.FC = () => {
   const metrics: Metric[] = [
-    { label: 'Record TPS', value: '15.52M', suffix: 'Verified by CertiK' },
-    { label: 'Gas Fees', value: '$0', suffix: 'Always free' },
-    { label: 'Computors', value: '676', suffix: 'Quorum consensus' },
+    { label: 'Record TPS', value: '15.52M', suffix: 'Proven scalability for mass adoption' },
+    { label: 'Gas Fees', value: '$0', suffix: 'Always free - no hidden costs or gas spikes' },
+    { label: 'Computors', value: '676', suffix: 'Ensuring decentralized consensus' },
   ];
 
   return (
@@ -25,7 +25,7 @@ export const MetricsBar: React.FC = () => {
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
       >
-        <h2 className="metrics-intro-title">Built on Qubic</h2>
+        <h2 className="section-title gradient-text">Built on Qubic</h2>
         <p className="metrics-intro-text">
           Forget what you know about blockchain. Qubic delivers unprecedented speed and zero fees. That's why we're building tools here — no compromises, no limits.
         </p>

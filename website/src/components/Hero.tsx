@@ -89,6 +89,7 @@ export const Hero: React.FC = () => {
   const [purpleTransform, setPurpleTransform] = useState<CubeTransform>({ x: 0, y: 0, rotate: 0 });
   const [isMobile, setIsMobile] = useState(false);
   const [showScrollIndicator, setShowScrollIndicator] = useState(true);
+  const [scrollIndicatorVisible, setScrollIndicatorVisible] = useState(false);
 
   const pinkCubeRef = useRef<HTMLDivElement>(null);
   const purpleCubeRef = useRef<HTMLDivElement>(null);
@@ -115,6 +116,13 @@ export const Hero: React.FC = () => {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setScrollIndicatorVisible(true);
+    }, 3000);
+    return () => clearTimeout(timer);
   }, []);
 
   const calculateMagneticPull = useCallback((cubeRef: React.RefObject<HTMLDivElement>, mouseX: number, mouseY: number): CubeTransform => {
@@ -202,13 +210,16 @@ export const Hero: React.FC = () => {
         ) : (
           /* Mobile 6-line layout */
           <div className="hero-multiline-title mobile-layout">
-            <div className="title-line line-right">
-              <FlatCube ref={pinkCubeRef} color="#ff0080" shift="-40px" transform={pinkTransform} /> One world
+            <div className="title-line line-center">
+              <FlatCube ref={pinkCubeRef} color="#ff0080" shift="-40px" transform={pinkTransform} /> One
             </div>
             <div className="title-line line-left">
-              to craft
+              world.
             </div>
             <div className="title-line line-right">
+              Crafting
+            </div>
+            <div className="title-line line-left">
               endless <FlatCube ref={purpleCubeRef} color="#7c3aed" shift="30px" transform={purpleTransform} />
             </div>
             <div className="title-line line-left">
@@ -268,9 +279,12 @@ export const Hero: React.FC = () => {
 
       {/* Scroll Indicator */}
       {showScrollIndicator && (
-        <div
+        <motion.div
           className="animate-bounce cursor-pointer"
           onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: scrollIndicatorVisible ? 1 : 0 }}
+          transition={{ duration: 0.5 }}
           style={{
             position: 'fixed',
             bottom: '40px',
@@ -300,7 +314,7 @@ export const Hero: React.FC = () => {
               d="M19 14l-7 7m0 0l-7-7m7 7V3"
             />
           </svg>
-        </div>
+        </motion.div>
       )}
     </section>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { QNSIcon, NFTIcon, StatsIcon } from '../assets/icons/ServiceIcons';
+import { QNSIcon, NFTIcon } from '../assets/icons/ServiceIcons';
 import './ServicesGrid.css';
 
 interface Service {
@@ -28,14 +28,6 @@ export const ServicesGrid: React.FC = () => {
       title: 'NFT Gallery',
       description: 'Explore Quties and other NFT collections on QubicBay. Discover, trade, and showcase digital art.',
       link: '/nft',
-      status: 'coming-soon',
-    },
-    {
-      id: 'stats',
-      icon: <StatsIcon size={80} />,
-      title: 'Network Statistics',
-      description: 'Real-time network performance metrics, TPS analytics, mining data, and network insights.',
-      link: '/statistics',
       status: 'coming-soon',
     },
   ];

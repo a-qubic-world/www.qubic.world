@@ -11,13 +11,13 @@ export const Navigation: React.FC = () => {
   return (
     <nav className="navigation">
       <div className="nav-container">
-        <div className="nav-logo">
+        <a href="/" className="nav-logo">
           <LogoIcon size={80} />
           <div className="nav-logo-text">
             <span className="nav-logo-qubic">qubic</span>
             <span className="nav-logo-world">.world</span>
           </div>
-        </div>
+        </a>
 
         {/* Desktop navigation */}
         <div className="nav-links desktop">

@@ -5,7 +5,7 @@ interface IconProps {
   className?: string;
 }
 
-// QNS Domain Service Icon - Stacked cards/rectangles
+// QNS Domain Service Icon - Stacked cards/rectangles (Official QNS logo)
 export const QNSIcon: React.FC<IconProps> = ({ size = 60, className }) => {
   return (
     <svg
@@ -21,13 +21,13 @@ export const QNSIcon: React.FC<IconProps> = ({ size = 60, className }) => {
           <stop offset="100%" style={{ stopColor: '#7c3aed', stopOpacity: 1 }} />
         </linearGradient>
       </defs>
-      <circle cx="30" cy="30" r="22" fill="none" stroke="url(#qns-grad)" strokeWidth="2.5" opacity="0.4" />
+      <circle cx="30" cy="30" r="22" fill="none" stroke="url(#qns-grad)" strokeWidth="2" opacity="0.4" />
       {/* Top card - rotated */}
-      <rect x="15" y="15" width="20" height="12" rx="2" fill="#ff0080" opacity="0.8" transform="rotate(15 25 21)" />
+      <rect x="20" y="12" width="20" height="12" rx="2" fill="#ff0080" opacity="0.8" transform="rotate(15 30 18)" />
       {/* Middle card */}
-      <rect x="18" y="24" width="24" height="12" rx="2" fill="url(#qns-grad)" opacity="1" />
+      <rect x="20" y="24" width="20" height="12" rx="2" fill="url(#qns-grad)" />
       {/* Bottom card - rotated */}
-      <rect x="20" y="33" width="20" height="12" rx="2" fill="#7c3aed" opacity="0.8" transform="rotate(-15 30 39)" />
+      <rect x="20" y="36" width="20" height="12" rx="2" fill="#7c3aed" opacity="0.8" transform="rotate(-15 30 42)" />
     </svg>
   );
 };

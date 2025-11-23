@@ -23,9 +23,12 @@ function SafeTradeTicker() {
   useEffect(() => {
     fetch('/api/ticker')
       .then((response) => {
-        console.log(response);
         if (!response.ok) {
           throw new Error('Network response was not ok');
+        }
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+          throw new Error('Response is not JSON');
         }
         return response.json();
       })
@@ -34,6 +37,7 @@ function SafeTradeTicker() {
         setLoading(false);
       })
       .catch((error: Error) => {
+        console.error('Ticker fetch error:', error.message);
         setError(error);
         setLoading(false);
       });

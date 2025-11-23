@@ -71,6 +71,10 @@
   min-height: 180px;
 }
 
+.line-center {
+  justify-content: center;
+}
+
 .line-center-right {
   justify-content: center;
   margin-right: -10%;

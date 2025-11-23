@@ -86,8 +86,8 @@
 .resource-card {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
-  padding: 25px;
+  border-radius: 20px;
+  padding: 40px;
   text-decoration: none;
   color: inherit;
   transition: all 0.3s ease;
@@ -109,7 +109,7 @@
 
 .resource-card:hover {
   border-color: rgba(255, 0, 128, 0.5);
-  box-shadow: 0 5px 20px rgba(255, 0, 128, 0.2);
+  box-shadow: 0 10px 40px rgba(255, 0, 128, 0.2);
 }
 
 .resource-card:hover::before {
