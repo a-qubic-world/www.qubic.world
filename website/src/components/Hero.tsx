@@ -37,9 +37,16 @@ const FlatCube = React.forwardRef<HTMLDivElement, { color: string; shift?: strin
   )
 );
 
-const CursorCube: React.FC<{ x: number; y: number }> = ({ x, y }) => {
+const CursorCube: React.FC<{
+  x: number;
+  y: number;
+  pinkCubeRef: React.RefObject<HTMLDivElement>;
+  purpleCubeRef: React.RefObject<HTMLDivElement>;
+  isVisible: boolean;
+}> = ({ x, y, pinkCubeRef, purpleCubeRef, isVisible }) => {
   const [prevPos, setPrevPos] = useState({ x: 0, y: 0 });
   const [velocity, setVelocity] = useState(0);
+  const [cubeColor, setCubeColor] = useState({ start: '#ff0080', end: '#7c3aed' });
 
   useEffect(() => {
     const dx = x - prevPos.x;
@@ -47,7 +54,36 @@ const CursorCube: React.FC<{ x: number; y: number }> = ({ x, y }) => {
     const speed = Math.sqrt(dx * dx + dy * dy);
     setVelocity(speed);
     setPrevPos({ x, y });
-  }, [x, y]);
+
+    // Check proximity to pink cube
+    if (pinkCubeRef.current) {
+      const rect = pinkCubeRef.current.getBoundingClientRect();
+      const cubeCenterX = rect.left + rect.width / 2;
+      const cubeCenterY = rect.top + rect.height / 2;
+      const distance = Math.sqrt((x - cubeCenterX) ** 2 + (y - cubeCenterY) ** 2);
+
+      if (distance < 150) {
+        setCubeColor({ start: '#ff0080', end: '#ff0080' });
+        return;
+      }
+    }
+
+    // Check proximity to purple cube
+    if (purpleCubeRef.current) {
+      const rect = purpleCubeRef.current.getBoundingClientRect();
+      const cubeCenterX = rect.left + rect.width / 2;
+      const cubeCenterY = rect.top + rect.height / 2;
+      const distance = Math.sqrt((x - cubeCenterX) ** 2 + (y - cubeCenterY) ** 2);
+
+      if (distance < 150) {
+        setCubeColor({ start: '#7c3aed', end: '#7c3aed' });
+        return;
+      }
+    }
+
+    // Default gradient
+    setCubeColor({ start: '#ff0080', end: '#7c3aed' });
+  }, [x, y, pinkCubeRef, purpleCubeRef]);
 
   const scaleX = 1 + Math.min(velocity / 100, 0.5);
   const scaleY = 1 - Math.min(velocity / 200, 0.3);
@@ -60,6 +96,7 @@ const CursorCube: React.FC<{ x: number; y: number }> = ({ x, y }) => {
         y: y - 25,
         scaleX,
         scaleY,
+        opacity: isVisible ? 0.8 : 0,
       }}
       transition={{
         type: "spring",
@@ -71,11 +108,11 @@ const CursorCube: React.FC<{ x: number; y: number }> = ({ x, y }) => {
       <svg width="50" height="50" viewBox="0 0 120 120">
         <defs>
           <linearGradient id="cursorGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#ff0080" />
-            <stop offset="100%" stopColor="#7c3aed" />
+            <stop offset="0%" stopColor={cubeColor.start} />
+            <stop offset="100%" stopColor={cubeColor.end} />
           </linearGradient>
         </defs>
-        <rect x="30" y="30" width="60" height="60" fill="url(#cursorGradient)" opacity="0.9" />
+        <rect x="30" y="30" width="60" height="60" fill="url(#cursorGradient)" opacity="0.6" />
       </svg>
     </motion.div>
   );
@@ -90,6 +127,8 @@ export const Hero: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [showScrollIndicator, setShowScrollIndicator] = useState(true);
   const [scrollIndicatorVisible, setScrollIndicatorVisible] = useState(false);
+  const [showCursorCube, setShowCursorCube] = useState(true);
+  const [cursorInWindow, setCursorInWindow] = useState(false);
 
   const pinkCubeRef = useRef<HTMLDivElement>(null);
   const purpleCubeRef = useRef<HTMLDivElement>(null);
@@ -112,8 +151,14 @@ export const Hero: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
+      const isAtTop = window.scrollY === 0;
       setShowScrollIndicator(window.scrollY < 50);
+      setShowCursorCube(isAtTop);
     };
+
+    // Set initial state
+    handleScroll();
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -155,6 +200,8 @@ export const Hero: React.FC = () => {
     let rafId: number;
 
     const handleMouseMove = (e: MouseEvent) => {
+      setCursorInWindow(true);
+
       if (rafId) cancelAnimationFrame(rafId);
 
       rafId = requestAnimationFrame(() => {
@@ -164,9 +211,17 @@ export const Hero: React.FC = () => {
       });
     };
 
+    const handleMouseEnter = () => setCursorInWindow(true);
+    const handleMouseLeave = () => setCursorInWindow(false);
+
     window.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseenter', handleMouseEnter);
+    document.addEventListener('mouseleave', handleMouseLeave);
+
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseenter', handleMouseEnter);
+      document.removeEventListener('mouseleave', handleMouseLeave);
       if (rafId) cancelAnimationFrame(rafId);
     };
   }, [calculateMagneticPull]);
@@ -275,7 +330,7 @@ export const Hero: React.FC = () => {
       </div>
 
       {/* Cursor cube */}
-      <CursorCube x={mousePos.x} y={mousePos.y} />
+      {showCursorCube && <CursorCube x={mousePos.x} y={mousePos.y} pinkCubeRef={pinkCubeRef} purpleCubeRef={purpleCubeRef} isVisible={cursorInWindow} />}
 
       {/* Scroll Indicator */}
       {showScrollIndicator && (
