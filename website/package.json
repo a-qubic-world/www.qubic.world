@@ -42,6 +42,8 @@
     ]
   },
   "devDependencies": {
-    "@types/testing-library__jest-dom": "^5.14.9"
+    "@types/testing-library__jest-dom": "^5.14.9",
+    "sharp": "^0.34.5",
+    "svg2png-cli": "^1.1.1"
   }
 }
