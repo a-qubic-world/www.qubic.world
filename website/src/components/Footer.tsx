@@ -7,9 +7,8 @@ export const Footer: React.FC = () => {
 
   const footerLinks = {
     products: [
-      { label: 'QNS Domains', url: '/domain' },
-      { label: 'NFT Gallery', url: '/nft' },
-      { label: 'Statistics', url: '/statistics' },
+      { label: 'QNS Domains', url: '/' },
+      { label: 'NFT Gallery', url: '/' },
     ],
     resources: [
       { label: 'Documentation', url: 'https://docs.qubic.org', external: true },

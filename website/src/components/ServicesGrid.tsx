@@ -26,7 +26,7 @@ export const ServicesGrid: React.FC = () => {
       id: 'nft',
       icon: <NFTIcon size={80} />,
       title: 'NFT Gallery',
-      description: 'Explore Quties and other NFT collections on QubicBay. Discover, trade, and showcase digital art.',
+      description: 'Explore NFT collections. Discover, trade, and showcase digital art.',
       link: '/nft',
       status: 'coming-soon',
     },

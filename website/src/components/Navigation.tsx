@@ -8,6 +8,17 @@ export const Navigation: React.FC = () => {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+    setTimeout(() => {
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 350);
+  };
+
   return (
     <nav className="navigation">
       <div className="nav-container">
@@ -48,9 +59,9 @@ export const Navigation: React.FC = () => {
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <a href="#technology" onClick={toggleMenu}>Technology</a>
-            <a href="#products" onClick={toggleMenu}>Products</a>
-            <a href="#developers" onClick={toggleMenu}>Developers</a>
+            <a href="#technology" onClick={(e) => handleNavClick(e, 'technology')}>Technology</a>
+            <a href="#products" onClick={(e) => handleNavClick(e, 'products')}>Products</a>
+            <a href="#developers" onClick={(e) => handleNavClick(e, 'developers')}>Developers</a>
           </motion.div>
         )}
       </AnimatePresence>
