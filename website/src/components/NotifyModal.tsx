@@ -65,7 +65,12 @@ export const NotifyModal: React.FC<NotifyModalProps> = ({ isOpen, onClose, defau
         userId = newUser.id;
       }
 
-      // Add subscriptions
+      // Delete existing subscriptions, then insert new ones
+      await supabase
+        .from('subscriptions')
+        .delete()
+        .eq('user_id', userId);
+
       const subscriptions = selectedProducts.map(product => ({
         user_id: userId,
         product,
@@ -73,7 +78,7 @@ export const NotifyModal: React.FC<NotifyModalProps> = ({ isOpen, onClose, defau
 
       const { error: subError } = await supabase
         .from('subscriptions')
-        .upsert(subscriptions, { onConflict: 'user_id,product' });
+        .insert(subscriptions);
 
       if (subError) throw subError;
 
