@@ -1,25 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { QNSIcon, NFTIcon } from '../assets/icons/ServiceIcons';
+import { NotifyModal } from './NotifyModal';
 import './ServicesGrid.css';
 
 interface Service {
-  id: string;
+  id: 'qns' | 'nft';
   icon: React.ReactNode;
   title: string;
   description: string;
-  link: string;
   status?: 'live' | 'coming-soon';
 }
 
 export const ServicesGrid: React.FC = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<'qns' | 'nft' | 'general'>('general');
+
+  const openModal = (productId: 'qns' | 'nft') => {
+    setSelectedProduct(productId);
+    setModalOpen(true);
+  };
+
   const services: Service[] = [
     {
       id: 'qns',
       icon: <QNSIcon size={80} />,
       title: 'QNS Domain Service',
       description: 'Human-readable addresses for Qubic. Replace complex wallet addresses with simple, memorable names.',
-      link: '/domain',
       status: 'coming-soon',
     },
     {
@@ -27,7 +34,6 @@ export const ServicesGrid: React.FC = () => {
       icon: <NFTIcon size={80} />,
       title: 'NFT Gallery',
       description: 'Explore NFT collections. Discover, trade, and showcase digital art.',
-      link: '/nft',
       status: 'coming-soon',
     },
   ];
@@ -61,9 +67,16 @@ export const ServicesGrid: React.FC = () => {
               <div className="service-icon">{service.icon}</div>
               <h3 className="service-title">{service.title}</h3>
               <p className="service-description">{service.description}</p>
-              <a href={service.link} className="service-link">
-                {service.status === 'coming-soon' ? 'Get Notified' : 'Explore →'}
-              </a>
+              {service.status === 'coming-soon' ? (
+                <button
+                  className="service-link service-link-button"
+                  onClick={() => openModal(service.id)}
+                >
+                  Get Notified
+                </button>
+              ) : (
+                <span className="service-link">Explore</span>
+              )}
               {service.status === 'coming-soon' && (
                 <span className="coming-soon-badge">Coming Soon</span>
               )}
@@ -71,6 +84,12 @@ export const ServicesGrid: React.FC = () => {
           ))}
         </div>
       </div>
+
+      <NotifyModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        defaultProduct={selectedProduct}
+      />
     </section>
   );
 };
