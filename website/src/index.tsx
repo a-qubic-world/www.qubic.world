@@ -8,6 +8,8 @@ import { ServicesGrid } from './components/ServicesGrid';
 import { DeveloperSection } from './components/DeveloperSection';
 import { Footer } from './components/Footer';
 import { Unsubscribe } from './components/Unsubscribe';
+import { PrivacyPolicy } from './components/PrivacyPolicy';
+import { TermsOfService } from './components/TermsOfService';
 import './styles/global.css';
 
 const HomePage: React.FC = () => {
@@ -41,6 +43,8 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/unsubscribe" element={<Unsubscribe />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<TermsOfService />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
